@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cloop™ – Your wardrobe, on autopilot</title>
+  <meta name="description" content="Cloop is a unisex clothing subscription where curated outfits arrive weekly. Wear, keep, or return. Professionally cleaned and sustainably rotated." />
+  <link rel="icon" href="/favicon.ico" />
+  <meta property="og:title" content="Cloop™ – Your wardrobe, on autopilot" />
+  <meta property="og:description" content="Curated outfits weekly. Wear, keep, or return. Unisex. Sustainable." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og.jpg" />
+  <meta property="og:url" content="https://cloop.example" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#111827', // near-black
+              light: '#1f2937'
+            },
+            accent: {
+              DEFAULT: '#22c55e', // emerald
+              dark: '#16a34a'
+            }
+          },
+          fontFamily: {
+            display: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+            body: ['Inter', 'ui-sans-serif', 'system-ui']
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(0,0,0,0.08)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    .glass { backdrop-filter: blur(8px); background: rgba(255,255,255,0.6); }
+    .gradient-bg { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+  </style>
+</head>
+<body class="font-body text-primary bg-white selection:bg-accent/20">
+  <!-- Top bar -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-2">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-accent"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M7 12a5 5 0 1 0 10 0" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="font-extrabold text-lg tracking-tight">cloop™</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#how" class="hover:text-accent transition">How it works</a>
+          <a href="#waitlist" class="hover:text-accent transition">Waitlist</a>
+          <a href="#plans" class="hover:text-accent transition">Plans</a>
+          <a href="#faq" class="hover:text-accent transition">FAQ</a>
+          <a href="#contact" class="hover:text-accent transition">Contact</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#plans" class="hidden sm:inline-flex px-4 py-2 rounded-xl bg-primary text-white hover:bg-gray-900 transition shadow-soft">Get started</a>
+          <button id="menuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 hover:bg-gray-50 transition">
+            <span class="sr-only">Open menu</span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-100 bg-white">
+      <div class="px-4 py-4 space-y-3">
+        <a href="#how" class="block py-2 text-sm hover:text-accent transition">How it works</a>
+        <a href="#waitlist" class="block py-2 text-sm hover:text-accent transition">Waitlist</a>
+        <a href="#plans" class="block py-2 text-sm hover:text-accent transition">Plans</a>
+        <a href="#faq" class="block py-2 text-sm hover:text-accent transition">FAQ</a>
+        <a href="#contact" class="block py-2 text-sm hover:text-accent transition">Contact</a>
+        <a href="#waitlist" class="inline-flex px-4 py-2 rounded-xl bg-primary text-white hover:bg-gray-900 transition shadow-soft text-sm">Join Waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="text-center lg:text-left">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+            Your wardrobe,<br>
+            <span class="text-accent">on autopilot</span>
+          </h1>
+          <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl">
+            Curated outfits delivered weekly. Wear what you love, keep what fits your style, return the rest. Unisex, sustainable, and effortlessly stylish.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a href="#waitlist" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-accent text-white hover:bg-accent-dark transition shadow-soft font-medium">
+              Join the Waitlist
+            </a>
+            <a href="#how" class="inline-flex items-center justify-center px-8 py-4 rounded-xl border border-gray-300 hover:bg-gray-50 transition font-medium">
+              How it works
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-white rounded-2xl shadow-soft p-8 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Weekly Delivery</h3>
+                  <p class="text-sm text-gray-600">Fresh outfits every Monday</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Keep What You Love</h3>
+                  <p class="text-sm text-gray-600">Purchase at member prices</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Sustainable Rotation</h3>
+                  <p class="text-sm text-gray-600">Professionally cleaned & reused</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">How Cloop Works</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Simple, sustainable, and personalized to your style</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <span class="text-2xl font-bold text-accent">1</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Tell Us Your Style</h3>
+          <p class="text-gray-600">Complete our style quiz and set your preferences. Our AI learns what you love.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <span class="text-2xl font-bold text-accent">2</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Receive Weekly Outfits</h3>
+          <p class="text-gray-600">Get 3-5 curated pieces delivered every Monday. Try them on and style them your way.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <span class="text-2xl font-bold text-accent">3</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Keep or Return</h3>
+          <p class="text-gray-600">Love it? Buy it at member prices. Not your style? Return it in the prepaid bag.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waitlist -->
+  <section id="waitlist" class="py-20 bg-accent/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-white rounded-2xl shadow-soft p-8 md:p-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Join the Waitlist</h2>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          Be the first to experience Cloop when we launch. Get early access, exclusive perks, and your first month at 50% off.
+        </p>
+        
+        <form id="waitlistForm" class="max-w-md mx-auto">
+          <div class="space-y-4 mb-6">
+            <div>
+              <input 
+                type="text" 
+                id="waitlistName" 
+                name="name" 
+                placeholder="Your name" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent" 
+                required
+              >
+            </div>
+            <div>
+              <input 
+                type="email" 
+                id="waitlistEmail" 
+                name="email" 
+                placeholder="Your email address" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent" 
+                required
+              >
+            </div>
+            <div>
+              <select 
+                id="waitlistSize" 
+                name="size" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent" 
+                required
+              >
+                <option value="">Select your size range</option>
+                <option value="XS-S">XS - S</option>
+                <option value="M-L">M - L</option>
+                <option value="XL-XXL">XL - XXL</option>
+                <option value="3XL+">3XL+</option>
+              </select>
+            </div>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="w-full py-4 px-8 rounded-xl bg-accent text-white hover:bg-accent-dark transition font-medium text-lg shadow-soft"
+          >
+            Join Waitlist
+          </button>
+        </form>
+        
+        <div id="waitlistSuccess" class="hidden mt-6 p-4 bg-accent/10 rounded-xl">
+          <div class="flex items-center justify-center gap-2 text-accent">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-medium">You're on the list!</span>
+          </div>
+          <p class="text-gray-600 mt-2">We'll notify you as soon as Cloop launches. Check your email for confirmation!</p>
+        </div>
+        
+        <div class="mt-8 grid grid-cols-3 gap-6 text-center">
+          <div>
+            <div class="text-2xl font-bold text-accent" id="waitlistCount">247</div>
+            <div class="text-sm text-gray-600">People waiting</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-accent">50%</div>
+            <div class="text-sm text-gray-600">Launch discount</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-accent">Q1</div>
+            <div class="text-sm text-gray-600">2024 Launch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plans -->
+  <section id="plans" class="py-20 gradient-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Choose Your Plan</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Flexible subscriptions that fit your lifestyle</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Essential Plan -->
+        <div class="bg-white rounded-2xl shadow-soft p-8 border border-gray-100">
+          <div class="text-center mb-8">
+            <h3 class="text-xl font-semibold mb-2">Essential</h3>
+            <div class="text-3xl font-bold mb-1">$89<span class="text-lg font-normal text-gray-600">/month</span></div>
+            <p class="text-gray-600">Perfect for trying Cloop</p>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>3 pieces per delivery</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Weekly deliveries</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Free shipping & returns</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>20% off retail prices</span>
+            </li>
+          </ul>
+          <button class="w-full py-3 px-6 rounded-xl border border-gray-300 hover:bg-gray-50 transition font-medium">
+            Start Essential
+          </button>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="bg-white rounded-2xl shadow-soft p-8 border-2 border-accent relative">
+          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            <span class="bg-accent text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+          </div>
+          <div class="text-center mb-8">
+            <h3 class="text-xl font-semibold mb-2">Premium</h3>
+            <div class="text-3xl font-bold mb-1">$149<span class="text-lg font-normal text-gray-600">/month</span></div>
+            <p class="text-gray-600">Best value for style lovers</p>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>5 pieces per delivery</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Weekly deliveries</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Free shipping & returns</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>30% off retail prices</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Priority styling</span>
+            </li>
+          </ul>
+          <button class="w-full py-3 px-6 rounded-xl bg-accent text-white hover:bg-accent-dark transition font-medium">
+            Start Premium
+          </button>
+        </div>
+
+        <!-- VIP Plan -->
+        <div class="bg-white rounded-2xl shadow-soft p-8 border border-gray-100">
+          <div class="text-center mb-8">
+            <h3 class="text-xl font-semibold mb-2">VIP</h3>
+            <div class="text-3xl font-bold mb-1">$249<span class="text-lg font-normal text-gray-600">/month</span></div>
+            <p class="text-gray-600">Ultimate style experience</p>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>8 pieces per delivery</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Weekly deliveries</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Free shipping & returns</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>40% off retail prices</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Personal stylist</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Designer brands</span>
+            </li>
+          </ul>
+          <button class="w-full py-3 px-6 rounded-xl border border-gray-300 hover:bg-gray-50 transition font-medium">
+            Start VIP
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+        <p class="text-lg text-gray-600">Everything you need to know about Cloop</p>
+      </div>
+      <div class="space-y-6">
+        <div class="faq-item border border-gray-200 rounded-xl p-6">
+          <button class="faq-question w-full text-left flex items-center justify-between font-semibold text-lg">
+            How does the sizing work?
+            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden mt-4 text-gray-600">
+            <p>We use your measurements and fit preferences to select the right sizes. Our AI learns from your feedback to improve future selections. If something doesn't fit, simply return it and we'll adjust your profile.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-gray-200 rounded-xl p-6">
+          <button class="faq-question w-full text-left flex items-center justify-between font-semibold text-lg">
+            Can I skip weeks or pause my subscription?
+            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden mt-4 text-gray-600">
+            <p>Absolutely! You can skip weeks, pause your subscription, or cancel anytime through your account dashboard. We understand that life happens and flexibility is important.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-gray-200 rounded-xl p-6">
+          <button class="faq-question w-full text-left flex items-center justify-between font-semibold text-lg">
+            What brands do you carry?
+            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden mt-4 text-gray-600">
+            <p>We partner with over 200 sustainable and contemporary brands, from emerging designers to established names. Our selection includes everything from everyday essentials to statement pieces, all chosen for quality and style.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-gray-200 rounded-xl p-6">
+          <button class="faq-question w-full text-left flex items-center justify-between font-semibold text-lg">
+            How clean are the clothes?
+            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden mt-4 text-gray-600">
+            <p>Every item is professionally cleaned using eco-friendly methods and thoroughly inspected before shipping. We maintain the highest hygiene standards and only send items in excellent condition.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-gray-200 rounded-xl p-6">
+          <button class="faq-question w-full text-left flex items-center justify-between font-semibold text-lg">
+            What if I want to buy something?
+            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden mt-4 text-gray-600">
+            <p>Love something? You can purchase any item at exclusive member prices (20-40% off retail). Just mark it as "keep" in your return bag or through the app, and we'll charge your account.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 gradient-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Get in Touch</h2>
+        <p class="text-lg text-gray-600">Have questions? We'd love to help you get started.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-xl font-semibold mb-6">Contact Information</h3>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>cloop.clothing@gmail.com</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Mon-Fri 9AM-6PM EST</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <form class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium mb-2">Name</label>
+              <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent" required>
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Email</label>
+              <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent" required>
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium mb-2">Message</label>
+              <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent" required></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 px-6 rounded-xl bg-accent text-white hover:bg-accent-dark transition font-medium">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-accent"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M7 12a5 5 0 1 0 10 0" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="font-extrabold text-lg tracking-tight">cloop™</span>
+          </div>
+          <p class="text-gray-400 mb-4">Your wardrobe, on autopilot. Sustainable fashion that fits your lifestyle.</p>
+          <div class="flex gap-4">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com/clothing" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+              </svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition">Careers</a></li>
+            <li><a href="#" class="hover:text-white transition">Press</a></li>
+            <li><a href="#" class="hover:text-white transition">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Support</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+            <li><a href="#" class="hover:text-white transition">Size Guide</a></li>
+            <li><a href="#" class="hover:text-white transition">Returns</a></li>
+            <li><a href="#" class="hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Legal</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-white transition">Cookie Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Accessibility</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+        <p>&copy; 2024 Cloop™. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // FAQ accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const icon = question.querySelector('svg');
+      
+      question.addEventListener('click', () => {
+        const isOpen = !answer.classList.contains('hidden');
+        
+        // Close all other FAQ items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.querySelector('.faq-answer').classList.add('hidden');
+            otherItem.querySelector('svg').classList.remove('rotate-180');
+          }
+        });
+        
+        // Toggle current item
+        if (isOpen) {
+          answer.classList.add('hidden');
+          icon.classList.remove('rotate-180');
+        } else {
+          answer.classList.remove('hidden');
+          icon.classList.add('rotate-180');
+        }
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close mobile menu if open
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+
+    // Contact form submission
+    const contactForm = document.querySelector('#contact form');
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const message = formData.get('message');
+      
+      // Simple validation
+      if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      
+      // Simulate form submission
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+     
+      setTimeout(() => {
+        alert('Thank you for your message! We\'ll get back to you soon.');
+        this.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, 1500);
+    });
+
+    // Plan selection buttons
+    const planButtons = document.querySelectorAll('#plans button');
+    planButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const planName = this.textContent.replace('Start ', '');
+        alert(`Thanks for your interest in the ${planName} plan! This would normally redirect to a signup flow.`);
+      });
+    });
+
+    // Waitlist form submission
+    const waitlistForm = document.getElementById('waitlistForm');
+    const waitlistSuccess = document.getElementById('waitlistSuccess');
+    const waitlistCount = document.getElementById('waitlistCount');
+    
+    waitlistForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const size = formData.get('size');
+      
+      // Simple validation
+      if (!name || !email || !size) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      
+      // Simulate form submission
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Joining...';
+      submitBtn.disabled = true;
+      var templateParams = {
+  name: name,
+  email: email,
+};
+
+emailjs.send('service_97ukefg', 'template_954md8g', templateParams).then(
+  (response) => {
+    console.log('SUCCESS!', response.status, response.text);
+  },
+  (error) => {
+    console.log('FAILED...', error);
+  },
+);
+      setTimeout(() => {
+        // Hide form and show success message
+        this.style.display = 'none';
+        waitlistSuccess.classList.remove('hidden');
+        
+        // Increment counter
+        const currentCount = parseInt(waitlistCount.textContent);
+        waitlistCount.textContent = currentCount + 1;
+        
+        // Store in localStorage (for demo purposes)
+        const waitlistData = {
+          name: name,
+          email: email,
+          size: size,
+          timestamp: new Date().toISOString()
+        };
+        localStorage.setItem('cloop_waitlist', JSON.stringify(waitlistData));
+        
+      }, 1500);
+    });
+
+    // Reset form on page load - no persistent success state
+    window.addEventListener('load', function() {
+      // Always show form and hide success message on page load
+      const waitlistForm = document.getElementById('waitlistForm');
+      const waitlistSuccess = document.getElementById('waitlistSuccess');
+      
+      waitlistForm.style.display = 'block';
+      waitlistSuccess.classList.add('hidden');
+      
+      // Clear form fields
+      waitlistForm.reset();
+    });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98de9e6941af1e28',t:'MTc2MDM1NjIyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "bJDYsbaYq6GW2uyDo",
+      });
+   })();
+   
+</script>
+
+</html>
